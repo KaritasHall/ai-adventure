@@ -15,7 +15,7 @@ export default async function handler(
   const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt:
-      "You are a storyteller in a text adventure game. Present the player with a scenario",
+      ".You are a storyteller in a text adventure game. Present the player with a scenario", //I got an extra string in the front of the response. I don't know why. But starting with a period fixes it.
     temperature: 0.5,
     max_tokens: 256,
     top_p: 1,
