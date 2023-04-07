@@ -4,9 +4,21 @@ import * as prismicH from "@prismicio/helpers";
 import { createClient } from "@root/prismicio";
 import { components } from "@root/slices";
 import { Layout } from "@/components/prismic-components/Layout";
-import { Bounded } from "@/components/prismic-components/Bounded";
-import { Heading } from "@/components/prismic-components/Heading";
-import { HorizontalDivider } from "@/components/prismic-components/HorizontalDivider";
+import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
+import { Heading } from "@/components/prismic-components/Heading/Heading";
+import { HorizontalDivider } from "@/components/prismic-components/HorizontalDivider/HorizontalDivider";
+import {
+  articleContainer,
+  articleDate,
+  articleTitle,
+  blogDate,
+  blogLink,
+  blogTitle,
+  latestPostsContainer,
+  latestPostsHeading,
+  latestPostsList,
+  latestPostsSection,
+} from "./styles.css";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -21,14 +33,12 @@ const LatestArticle = ({ article }: { article: any }) => {
 
   return (
     <li>
-      <h1 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+      <h1 className={blogTitle}>
         <PrismicLink document={article}>
           <PrismicText field={article.data.title} />
         </PrismicLink>
       </h1>
-      <p className="font-serif italic tracking-tighter text-slate-500">
-        {dateFormatter.format(date ?? undefined)}
-      </p>
+      <p className={blogDate}>{dateFormatter.format(date ?? undefined)}</p>
     </li>
   );
 };
@@ -52,19 +62,16 @@ const Article = ({ article, latestArticles, navigation, settings }: any) => {
         </title>
       </Head>
       <Bounded>
-        <PrismicLink
-          href="/blog"
-          className="font-semibold tracking-tight text-slate-400"
-        >
+        <PrismicLink href="/blog" className={blogLink}>
           &larr; Back to articles
         </PrismicLink>
       </Bounded>
       <article>
-        <Bounded className="pb-0">
-          <h1 className="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">
+        <Bounded className={articleContainer}>
+          <h1 className={articleTitle}>
             <PrismicText field={article.data.title} />
           </h1>
-          <p className="font-serif italic tracking-tighter text-slate-500">
+          <p className={articleDate}>
             {dateFormatter.format(date ?? undefined)}
           </p>
         </Bounded>
@@ -72,13 +79,13 @@ const Article = ({ article, latestArticles, navigation, settings }: any) => {
       </article>
       {latestArticles.length > 0 && (
         <Bounded>
-          <div className="grid grid-cols-1 justify-items-center gap-16 md:gap-24">
+          <div className={latestPostsSection}>
             <HorizontalDivider />
-            <div className="w-full">
-              <Heading size="2xl" className="mb-10">
+            <div className={latestPostsContainer}>
+              <Heading size="2xl" className={latestPostsHeading}>
                 Latest articles
               </Heading>
-              <ul className="grid grid-cols-1 gap-12">
+              <ul className={latestPostsList}>
                 {latestArticles.map((article: any) => (
                   <LatestArticle key={article.id} article={article} />
                 ))}

@@ -1,4 +1,12 @@
-import { Bounded } from "@/components/prismic-components/Bounded";
+import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
+import {
+  contactForm,
+  field,
+  inputField,
+  message,
+  submitButton,
+  textAreaField,
+} from "./contact-form.css";
 
 const Field = ({
   label,
@@ -9,7 +17,7 @@ const Field = ({
 }) => {
   return (
     <label>
-      <span className="text-sm text-slate-500">{label}</span>
+      <span className={field}>{label}</span>
       {children}
     </label>
   );
@@ -35,7 +43,7 @@ const InputField = ({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-none border-b border-slate-200 py-3 pr-7 pl-3 text-slate-800 placeholder-slate-400"
+        className={inputField}
       />
     </Field>
   );
@@ -58,7 +66,7 @@ const TextareaField = ({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="h-40 w-full rounded-none border-b border-slate-200 py-3 pr-7 pl-3 text-slate-800 placeholder-slate-400"
+        className={textAreaField}
       />
     </Field>
   );
@@ -67,11 +75,7 @@ const TextareaField = ({
 const ContactForm = () => {
   return (
     <Bounded as="section" size="small">
-      <form
-        action="/api/contact"
-        method="post"
-        className="grid grid-cols-1 gap-6"
-      >
+      <form action="/api/contact" method="post" className={contactForm}>
         <InputField label="Name" name="name" placeholder="Jane Doe" />
         <InputField
           label="Email Address"
@@ -84,12 +88,9 @@ const ContactForm = () => {
           name="message"
           placeholder="Write your message here…"
         />
-        <button
-          type="submit"
-          className="ml-auto inline-flex items-center gap-2"
-        >
+        <button type="submit" className={submitButton}>
           Send message{" "}
-          <span aria-hidden={true} className="text-xl">
+          <span aria-hidden={true} className={message}>
             &rarr;
           </span>
         </button>

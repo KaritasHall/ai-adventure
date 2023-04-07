@@ -1,26 +1,58 @@
-import { Configuration, OpenAIApi } from "openai";
+import {
+  ChatCompletionRequestMessage,
+  Configuration,
+  CreateChatCompletionResponse,
+  OpenAIApi,
+} from "openai";
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { CreateCompletionResponse } from "openai";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
+// Here is the initial message that is sent to the API when the user first loads the page.
+// We define the core behavior of the chatbot here
+const initialMessage: ChatCompletionRequestMessage = {
+  role: "system",
+  content:
+    "You control a spooky text adventure game. Present the player with a single short but interesting scenario. You must always tell the story from the player's perspective. Keep each scenario short and precise.",
+};
+
+// This is the main handler function that is called when the user submits a message
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<CreateCompletionResponse>
+  res: NextApiResponse<CreateChatCompletionResponse>
 ) {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt:
-      ".You are a storyteller in a text adventure game. Present the player with a scenario", //I got an extra string in the front of the response. I don't know why. But starting with a period fixes it.
+  console.log("initial?:", req.body.messages === undefined);
+
+  // The API expects an array of messages, so we need to check if the request body is empty
+  // If the request body is empty, we set the prompt to be the initial message
+  // I.e the user has just loaded the page and should be presented with the initial message/scenario
+  let prompt;
+  if (req.body.messages === undefined) {
+    prompt = [initialMessage];
+  } else if (req.body.messages.length === 0) {
+    prompt = [initialMessage];
+  } else {
+    prompt = req.body.messages;
+  }
+
+  console.log(prompt, typeof prompt);
+
+  console.log(prompt);
+
+  // Here we call the API and pass in the prompt
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: prompt,
     temperature: 0.5,
     max_tokens: 256,
-    top_p: 1,
+    // top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
+    // stop: ["Player:", "Storyteller:"],
   });
 
   res.status(200).json(response.data);

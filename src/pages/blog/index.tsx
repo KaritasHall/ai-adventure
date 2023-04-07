@@ -3,8 +3,9 @@ import * as prismicH from "@prismicio/helpers";
 
 import { createClient } from "@root/prismicio";
 import { Layout } from "@/components/prismic-components/Layout";
-import { Bounded } from "@/components/prismic-components/Bounded";
-import { Article } from "@/components/prismic-components/Article";
+import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
+import { Article } from "@/components/prismic-components/Article/Article";
+import { indexArticleList } from "./styles.css";
 
 const Index = ({ articles, navigation, settings }: any) => {
   return (
@@ -17,7 +18,7 @@ const Index = ({ articles, navigation, settings }: any) => {
         <title>{prismicH.asText(settings.data.name)}</title>
       </Head>
       <Bounded size="widest">
-        <ul className="grid grid-cols-1 gap-16">
+        <ul className={indexArticleList}>
           {articles.map((article: any) => (
             <Article key={article.id} article={article} />
           ))}

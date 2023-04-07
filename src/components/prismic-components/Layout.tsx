@@ -1,12 +1,10 @@
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { Header } from "./Header/Header";
 
 export const Layout = ({
   navigation,
   settings,
   withHeaderDivider,
   withProfile,
-  withSignUpForm,
   children,
 }: {
   navigation: any;
@@ -17,7 +15,7 @@ export const Layout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="text-slate-700">
+    <div>
       <Header
         withProfile={withProfile}
         withDivider={withHeaderDivider}
@@ -25,7 +23,6 @@ export const Layout = ({
         settings={settings}
       />
       <main>{children}</main>
-      <Footer withSignUpForm={withSignUpForm} settings={settings} />
     </div>
   );
 };
