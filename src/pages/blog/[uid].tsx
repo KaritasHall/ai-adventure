@@ -18,7 +18,7 @@ import {
   latestPostsHeading,
   latestPostsList,
   latestPostsSection,
-} from "./styles.css";
+} from "../../styles/blog-styles.css";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",

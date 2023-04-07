@@ -5,7 +5,7 @@ import { createClient } from "@root/prismicio";
 import { Layout } from "@/components/prismic-components/Layout";
 import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
 import { Article } from "@/components/prismic-components/Article/Article";
-import { indexArticleList } from "./styles.css";
+import { indexArticleList } from "../../styles/blog-styles.css";
 
 const Index = ({ articles, navigation, settings }: any) => {
   return (
