@@ -1,3 +1,4 @@
+import { blogThemeContract } from "@/styles/themes.css";
 import { style } from "@vanilla-extract/css";
 
 export const profileSection = style({
@@ -27,7 +28,7 @@ export const navContainer = style({
 export const navItem = style({
   fontSize: 18,
   ":hover": {
-    color: "hotpink",
+    color: blogThemeContract.accent,
   },
 });
 

@@ -1,4 +1,5 @@
-import { style, keyframes, layer } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
+import { themeContract } from "./themes.css";
 
 export const header = style({
   display: "flex",
@@ -19,12 +20,8 @@ export const blogLink = style({
   fontSize: 18,
   fontFamily: "Lato, sans-serif",
   ":hover": {
-    color: "hotpink",
+    color: themeContract.player,
   },
-});
-
-export const gameContainer = style({
-  backgroundColor: "#0e0e10",
 });
 
 export const mainSection = style({
@@ -32,7 +29,7 @@ export const mainSection = style({
   flexDirection: "column",
   alignItems: "center",
   fontFamily: "monospace",
-  backgroundColor: "black",
+  backgroundColor: themeContract.background,
   minHeight: "100vh",
 });
 
@@ -45,11 +42,11 @@ export const gameContent = style({
   overflow: "auto",
   "::-webkit-scrollbar": {
     width: "8px",
-    backgroundColor: "pink",
+    backgroundColor: themeContract.player,
   },
 
   "::-webkit-scrollbar-thumb": {
-    backgroundColor: "hotpink",
+    backgroundColor: themeContract.storyteller,
     borderRadius: "2px",
   },
 });
@@ -59,13 +56,24 @@ export const typing = keyframes({
   to: { width: "100%" },
 });
 
+export const fadeIn = keyframes({
+  from: { opacity: 0 },
+  to: { opacity: 1 },
+});
+
 export const assistant = style({
-  color: "#FFC107",
+  color: themeContract.storyteller,
   paddingBlock: 10,
 });
 
+export const latestAssistantMessage = style({
+  color: themeContract.storyteller,
+  paddingBlock: 10,
+  animation: `${fadeIn} 0.5s ease-in`,
+});
+
 export const user = style({
-  color: "white",
+  color: themeContract.player,
 });
 
 export const playerInputContainer = style({
@@ -75,7 +83,7 @@ export const playerInputContainer = style({
 });
 
 export const typePrompt = style({
-  color: "white",
+  color: themeContract.player,
   fontSize: 28,
   paddingTop: 2,
 });
@@ -87,7 +95,7 @@ export const playerInput = style({
   marginTop: 10,
   marginBottom: 10,
   backgroundColor: "transparent",
-  color: "white",
+  color: themeContract.player,
   fontFamily: "monospace",
   fontSize: 18,
   width: 300,
@@ -95,6 +103,7 @@ export const playerInput = style({
 
 export const loadingMessage = style({
   color: "#FF00FF",
+  paddingTop: 15,
   overflow: "hidden",
   whiteSpace: "nowrap",
   animation: `${typing} 3.5s steps(40, end)`,
@@ -104,4 +113,64 @@ export const errorMessage = style({
   overflow: "hidden",
   whiteSpace: "nowrap",
   animation: `${typing} 3.5s steps(40, end)`,
+});
+
+// Word animations
+
+export const flickerAnimation = keyframes({
+  "0%": { opacity: 1 },
+  "25%": { opacity: 0.8 },
+  "50%": { opacity: 0.6 },
+  "75%": { opacity: 0.9 },
+  "100%": { opacity: 0.7 },
+});
+
+export const glowAnimation = keyframes({
+  "0%": {
+    textShadow:
+      "0 0 5px #ffcc66, 0 0 10px #ffcc66, 0 0 20px #ffcc66, 0 0 40px #ffcc66",
+  },
+  "100%": {
+    textShadow:
+      "0 0 10px #ffcc66, 0 0 20px #ffcc66, 0 0 40px #ffcc66, 0 0 80px #ffcc66",
+  },
+});
+
+export const rustleAnimation = keyframes({
+  "0%": {
+    transform: "rotate(0deg) translateX(0)",
+  },
+  "20%": {
+    transform: "rotate(10deg) translateX(2px)",
+  },
+  "40%": {
+    transform: "rotate(-10deg) translateX(-2px)",
+  },
+  "60%": {
+    transform: "rotate(5deg) translateX(1px)",
+  },
+  "80%": {
+    transform: "rotate(-5deg) translateX(-1px)",
+  },
+  "100%": {
+    transform: "rotate(0deg) translateX(0)",
+  },
+});
+
+export const you = style({
+  // for testing!
+});
+
+export const flicker = style({
+  animation: `${flickerAnimation} 2s infinite, ${glowAnimation} infinite alternate`,
+});
+
+export const glow = style({
+  animation: `${glowAnimation} 0.5s infinite alternate`,
+});
+
+export const rustle = style({
+  display: "inline-block",
+  color: themeContract.player,
+  animation: `${rustleAnimation} 2s infinite`,
 });

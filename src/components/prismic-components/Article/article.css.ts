@@ -1,3 +1,4 @@
+import { blogThemeContract } from "@/styles/themes.css";
 import { style } from "@vanilla-extract/css";
 export const imgContainer = style({
   position: "relative",
@@ -18,6 +19,7 @@ export const overview = style({
 export const dateText = style({
   fontStyle: "italic",
   letterSpacing: -0.8,
+  color: blogThemeContract.accent,
 });
 
 export const excerptText = style({

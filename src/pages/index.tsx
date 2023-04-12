@@ -5,10 +5,19 @@ import {
   ChatCompletionRequestMessage,
   CreateChatCompletionResponse,
 } from "openai";
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { Loading } from "@/lib/loading";
 import { randomError } from "@/lib/error-messages";
-import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
+import { WordFilter } from "@/components/wordFilter";
+
+import {
+  defaultTheme,
+  forestTheme,
+  mansionTheme,
+  abandonedTheme,
+  caveTheme,
+} from "@/styles/themes.css";
+
 import {
   mainSection,
   blogLink,
@@ -21,6 +30,7 @@ import {
   typePrompt,
   playerInputContainer,
   header,
+  latestAssistantMessage,
 } from "@/styles/game.css";
 
 // This is the game loop
@@ -130,6 +140,28 @@ export default function Game() {
     }
   }, [latestStoryTellerDialogue]);
 
+  // Themes for the game - we switch between themes based on the latest story teller dialogue
+  const activeTheme = useMemo(() => {
+    if (typeof window === "undefined") return defaultTheme;
+    let dialogue = latestStoryTellerDialogue?.content;
+    if (dialogue === undefined) {
+      dialogue = dialogueHistory[dialogueHistory.length - 2]?.content;
+    }
+    if (dialogue?.includes("forest")) {
+      return forestTheme;
+    }
+    if (dialogue?.includes("mansion")) {
+      return mansionTheme;
+    }
+    if (dialogue?.includes("abandoned mansion")) {
+      return abandonedTheme;
+    }
+    if (dialogue?.includes("cave")) {
+      return caveTheme;
+    }
+    return defaultTheme;
+  }, [latestStoryTellerDialogue, dialogueHistory]);
+
   return (
     <>
       <Head>
@@ -139,7 +171,7 @@ export default function Game() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={mainSection}>
+      <main className={`${mainSection} ${activeTheme}`}>
         <>
           <nav className={header}>
             <h3 className={gameTitle}>AI Adventure</h3>
@@ -151,40 +183,41 @@ export default function Game() {
           <div className={gameContent} ref={divRef}>
             <>
               {dialogueHistory.map(({ content, role }, index) => (
-                <p key={index} className={role === "user" ? user : assistant}>
+                <WordFilter
+                  key={index}
+                  className={role === "user" ? user : assistant}
+                >
                   {content}
-                </p>
+                </WordFilter>
               ))}
               {latestStoryTellerDialogue && (
-                <p
+                <WordFilter
+                  key={latestStoryTellerDialogue.content}
                   className={
-                    latestStoryTellerDialogue.role === "user" ? user : assistant
+                    latestStoryTellerDialogue.role === "user"
+                      ? user
+                      : latestAssistantMessage
                   }
                 >
                   {latestStoryTellerDialogue.content}
-                </p>
+                </WordFilter>
               )}
               {isLoading && <p className={loadingMessage}>{randomLoading}</p>}
               {error && <p className={errorMessage}>{errorMessage}</p>}
             </>
-            <div className={playerInputContainer}>
-              <p className={typePrompt}>&gt;</p>
-              <input
-                type="text"
-                value={userInput}
-                onChange={handleUserInput}
-                className={playerInput}
-                autoFocus={true}
-                onKeyDown={handleKeyPress}
-              />
-              {/* <button
-                type="button"
-                onClick={handleSubmit}
-                disabled={isLoading || userInput === ""}
-              >
-                Submit
-              </button> */}
-            </div>
+            {latestStoryTellerDialogue && (
+              <div className={playerInputContainer}>
+                <p className={typePrompt}>&gt;</p>
+                <input
+                  type="text"
+                  value={userInput}
+                  onChange={handleUserInput}
+                  className={playerInput}
+                  autoFocus={true}
+                  onKeyDown={handleKeyPress}
+                />
+              </div>
+            )}
           </div>
         </>
       </main>

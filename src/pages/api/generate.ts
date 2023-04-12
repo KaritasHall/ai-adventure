@@ -17,7 +17,7 @@ const openai = new OpenAIApi(configuration);
 const initialMessage: ChatCompletionRequestMessage = {
   role: "system",
   content:
-    "You control a spooky text adventure game. Present the player with a single short but interesting scenario. You must always tell the story from the player's perspective. Keep each scenario short and precise.",
+    "You control a text adventure game. Present the player with a short but interesting scenario. You must always describe the scene from the player's perspective. The story should be slow paced. Keep each scenario short and precise, and end it by offering the player a choice of actions. The atmosphere of the game is mysterious.",
 };
 
 // This is the main handler function that is called when the user submits a message
@@ -49,7 +49,7 @@ export default async function handler(
     messages: prompt,
     temperature: 0.5,
     max_tokens: 256,
-    // top_p: 1,
+    top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
     // stop: ["Player:", "Storyteller:"],

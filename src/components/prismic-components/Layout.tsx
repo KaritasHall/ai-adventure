@@ -6,6 +6,7 @@ export const Layout = ({
   withHeaderDivider,
   withProfile,
   children,
+  className,
 }: {
   navigation: any;
   settings: any;
@@ -13,9 +14,10 @@ export const Layout = ({
   withProfile?: boolean;
   withSignUpForm?: boolean;
   children: React.ReactNode;
+  className?: string;
 }) => {
   return (
-    <div>
+    <div className={className}>
       <Header
         withProfile={withProfile}
         withDivider={withHeaderDivider}

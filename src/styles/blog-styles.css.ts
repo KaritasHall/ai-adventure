@@ -1,4 +1,10 @@
 import { style } from "@vanilla-extract/css";
+import { blogThemeContract } from "./themes.css";
+
+export const blogBackdrop = style({
+  backgroundColor: blogThemeContract.background,
+  minHeight: "100vh",
+});
 
 export const blogTitle = style({
   marginBottom: 4,
@@ -20,6 +26,8 @@ export const blogDate = style({
 export const blogLink = style({
   fontSize: 16,
   letterSpacing: 0.4,
+  fontWeight: "600",
+  color: blogThemeContract.accent,
 });
 
 export const articleContainer = style({
@@ -40,6 +48,7 @@ export const articleTitle = style({
 
 export const articleDate = style({
   fontStyle: "italic",
+  color: blogThemeContract.accent,
 });
 
 export const latestPostsSection = style({

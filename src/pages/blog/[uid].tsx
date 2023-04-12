@@ -11,6 +11,7 @@ import {
   articleContainer,
   articleDate,
   articleTitle,
+  blogBackdrop,
   blogDate,
   blogLink,
   blogTitle,
@@ -54,6 +55,7 @@ const Article = ({ article, latestArticles, navigation, settings }: any) => {
       withProfile={false}
       navigation={navigation}
       settings={settings}
+      className={blogBackdrop}
     >
       <Head>
         <title>
@@ -75,7 +77,9 @@ const Article = ({ article, latestArticles, navigation, settings }: any) => {
             {dateFormatter.format(date ?? undefined)}
           </p>
         </Bounded>
-        <SliceZone slices={article.data.slices} components={components} />
+        <div id="article">
+          <SliceZone slices={article.data.slices} components={components} />
+        </div>
       </article>
       {latestArticles.length > 0 && (
         <Bounded>

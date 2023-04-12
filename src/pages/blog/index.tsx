@@ -5,7 +5,7 @@ import { createClient } from "@root/prismicio";
 import { Layout } from "@/components/prismic-components/Layout";
 import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
 import { Article } from "@/components/prismic-components/Article/Article";
-import { indexArticleList } from "../../styles/blog-styles.css";
+import { indexArticleList, blogBackdrop } from "../../styles/blog-styles.css";
 
 const Index = ({ articles, navigation, settings }: any) => {
   return (
@@ -13,6 +13,7 @@ const Index = ({ articles, navigation, settings }: any) => {
       withHeaderDivider={false}
       navigation={navigation}
       settings={settings}
+      className={blogBackdrop}
     >
       <Head>
         <title>{prismicH.asText(settings.data.name)}</title>
