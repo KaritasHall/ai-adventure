@@ -197,9 +197,9 @@ export default function Game() {
         <title>AI Adventure</title>
         <meta name="description" content="AI text adventure game" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="hotpink" />
+        <meta name="theme-color" content="#FF69B4" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/crystal-ball.png" />
       </Head>
 
       <main className={`${mainSection} ${currentTheme}`}>

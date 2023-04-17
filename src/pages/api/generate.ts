@@ -12,6 +12,8 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+console.log("Configuration", configuration);
+
 // Here is the initial message that is sent to the API when the user first loads the page.
 // We define the core behavior of the chatbot here
 const initialMessage: ChatCompletionRequestMessage = {
