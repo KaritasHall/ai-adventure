@@ -4,7 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const configuration = new Configuration({
   apiKey: process.env.DALLE_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
+
+console.log("Configuration", configuration);
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,5 +22,4 @@ export default async function handler(
   });
 
   res.status(200).json(response.data);
-  console.log(response.data);
 }
