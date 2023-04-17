@@ -8,6 +8,6 @@ export const randomError = [
   "Your fate is sealed, invalid input detected.",
   "The gates of the abyss are closed, access denied.",
   "The connection to the other side is lost, please reconnect and try again.",
-  "The game file has been claimed by the void, please reinstall the game.",
+  "The game file has been claimed by the void, please try again later.",
   "A curse has befallen the game, unknown error detected.",
 ];

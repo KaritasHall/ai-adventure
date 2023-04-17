@@ -5,7 +5,7 @@ import {
   ChatCompletionRequestMessage,
   CreateChatCompletionResponse,
 } from "openai";
-import { useEffect, useMemo, useState, useRef, useCallback } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Loading } from "@/lib/loading";
 import { randomError } from "@/lib/error-messages";
 import { WordFilter } from "@/components/wordFilter";
@@ -33,6 +33,8 @@ import {
   latestAssistantMessage,
 } from "@/styles/game.css";
 
+import DalleImg from "@/components/dalleImg";
+
 // This is the game loop
 // We first send the inital prompt to the API and render the opening scenario
 // Then we wait for the user to input a response
@@ -40,8 +42,10 @@ import {
 // Then we fetch and render the API's response
 
 export default function Game() {
+  // States for loading, error and theme
   const [randomLoading, setRandomLoading] = useState<string>(Loading[0]);
   const [errorMessage, setErrorMessage] = useState<string>(randomError[0]);
+  const [currentTheme, setCurrentTheme] = useState<string>(defaultTheme);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -50,7 +54,7 @@ export default function Game() {
     );
   }, []);
 
-  // The states we need to keep track of:
+  // The main states we need to keep track of:
   // - The user's latest input (the most recent response from the user)
   // - The dialogue history (defined as ChatCompletionRequestMessage from the openai package)
   // - The latest story teller dialogue (the most recent response from the API)
@@ -60,6 +64,30 @@ export default function Game() {
   >([]);
   const [latestStoryTellerDialogue, setLatestStoryTellerDialogue] =
     useState<ChatCompletionRequestMessage>();
+
+  // Taking the first two sentences of the latest story teller dialogue
+  // Storing it in a variable so we can use it as a prompt for the image generation
+  const imagePrompt = useMemo(() => {
+    if (dialogueHistory.length) {
+      const promptSplit = dialogueHistory[0]?.content.split(".");
+      if (!promptSplit) return "";
+      if (promptSplit.length < 2) {
+        return `${promptSplit[0]}.`;
+      }
+
+      return `${promptSplit[0]}.${promptSplit[1]}.`;
+    } else {
+      const promptSplit = latestStoryTellerDialogue?.content.split(".");
+      if (!promptSplit) return "";
+      if (promptSplit.length < 2) {
+        return `${promptSplit[0]}.`;
+      }
+
+      return `${promptSplit[0]}.${promptSplit[1]}.`;
+    }
+  }, [dialogueHistory, latestStoryTellerDialogue]);
+
+  console.log("image prompt:", imagePrompt);
 
   // Generate a new random loading message when the latest story teller dialogue changes
   useEffect(() => {
@@ -141,26 +169,27 @@ export default function Game() {
   }, [latestStoryTellerDialogue]);
 
   // Themes for the game - we switch between themes based on the latest story teller dialogue
-  const activeTheme = useMemo(() => {
-    if (typeof window === "undefined") return defaultTheme;
+  useEffect(() => {
     let dialogue = latestStoryTellerDialogue?.content;
     if (dialogue === undefined) {
       dialogue = dialogueHistory[dialogueHistory.length - 2]?.content;
     }
     if (dialogue?.includes("forest")) {
-      return forestTheme;
+      setCurrentTheme(forestTheme);
     }
     if (dialogue?.includes("mansion")) {
-      return mansionTheme;
+      setCurrentTheme(mansionTheme);
     }
-    if (dialogue?.includes("abandoned mansion")) {
-      return abandonedTheme;
+    if (dialogue?.includes("abandoned castle")) {
+      setCurrentTheme(abandonedTheme);
     }
     if (dialogue?.includes("cave")) {
-      return caveTheme;
+      setCurrentTheme(caveTheme);
     }
-    return defaultTheme;
   }, [latestStoryTellerDialogue, dialogueHistory]);
+
+  console.log(currentTheme);
+  console.log(latestStoryTellerDialogue);
 
   return (
     <>
@@ -171,7 +200,7 @@ export default function Game() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={`${mainSection} ${activeTheme}`}>
+      <main className={`${mainSection} ${currentTheme}`}>
         <>
           <nav className={header}>
             <h3 className={gameTitle}>AI Adventure</h3>
@@ -180,6 +209,9 @@ export default function Game() {
               Blog
             </Link>
           </nav>
+
+          <DalleImg imagePrompt={imagePrompt} />
+
           <div className={gameContent} ref={divRef}>
             <>
               {dialogueHistory.map(({ content, role }, index) => (

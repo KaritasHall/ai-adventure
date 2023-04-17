@@ -17,8 +17,9 @@ const openai = new OpenAIApi(configuration);
 const initialMessage: ChatCompletionRequestMessage = {
   role: "system",
   content:
-    "You control a text adventure game. Present the player with a short but interesting scenario. You must always describe the scene from the player's perspective. The story should be slow paced. Keep each scenario short and precise, and end it by offering the player a choice of actions. The atmosphere of the game is mysterious.",
+    "Behave as a text adventure game. Generate a starting location and introduction. Possible starting locations: forest, abandoned castle, mansion and cave.  Write your responses in the second person. Limit the chronology of your responses to the moments following any action I dictate. Do not summarize events or advance time in the game's story beyond the outcome of my actions. Use dialogue and concise, but detailed descriptions.At the end of your output include all items that I currently possess. Do not add items that I have not picked up or remove any items that I have not lost, dropped, etc. Game Parameters - Style:[ Like a combination of Zork and Colonel's bequest ]Themes:[Mystery, Adventure] Format your output like this: Scenario, Numbered list of 2 to 3 likely commands suitable for narrative. Inventory: [items in my possession]",
 };
+// "You control a text adventure game. Present the player with a short but interesting scenario. You must always describe the scene from the player's perspective. The story should be slow paced. Keep each scenario short and precise, and end it by offering the player a choice of actions. The atmosphere of the game is mysterious.",
 
 // This is the main handler function that is called when the user submits a message
 export default async function handler(
@@ -45,14 +46,14 @@ export default async function handler(
 
   // Here we call the API and pass in the prompt
   const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    // model: "gpt-3.5-turbo",
+    model: "gpt-4",
     messages: prompt,
     temperature: 0.5,
     max_tokens: 256,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    // stop: ["Player:", "Storyteller:"],
   });
 
   res.status(200).json(response.data);

@@ -16,6 +16,7 @@ const targetWords = [
   "rustling",
 ];
 
+// This is a map of words to their corresponding CSS class
 const wordStyleMap: Record<string, string> = {
   flicker: flicker,
   flickering: flicker,
@@ -31,11 +32,14 @@ const wordStyleMap: Record<string, string> = {
   rustling: rustle,
 };
 
+// This interface defines the props that the WordFilter component accepts
 interface WordWrapperProps {
   children: React.ReactNode;
   className?: string;
 }
 
+// This is a component that wraps a paragraph of text and applies the CSS classes to the target words
+// It replaces the target words with spans that have the corresponding CSS class
 export function WordFilter({ children, className }: WordWrapperProps) {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
 

@@ -22,6 +22,11 @@ globalStyle("#article p > a", {
   textDecoration: "underline",
 });
 
+globalStyle("#article ul > li", {
+  color: blogThemeContract.text,
+  listStyle: "disc",
+});
+
 globalStyle("#article p > a:hover", {
   color: blogThemeContract.heading,
 });

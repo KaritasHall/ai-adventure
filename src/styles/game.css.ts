@@ -36,9 +36,10 @@ export const mainSection = style({
 export const gameContent = style({
   marginInline: 180,
   padding: 28,
+  marginTop: 30,
   fontSize: 18,
   lineHeight: 1.5,
-  height: "60vh",
+  height: "50vh",
   overflow: "auto",
   "::-webkit-scrollbar": {
     width: "8px",
@@ -102,7 +103,7 @@ export const playerInput = style({
 });
 
 export const loadingMessage = style({
-  color: "#FF00FF",
+  color: "#F5F5F5",
   paddingTop: 15,
   overflow: "hidden",
   whiteSpace: "nowrap",
@@ -112,10 +113,9 @@ export const errorMessage = style({
   color: "red",
   overflow: "hidden",
   whiteSpace: "nowrap",
-  animation: `${typing} 3.5s steps(40, end)`,
 });
 
-// Word animations
+// Word filter animations
 
 export const flickerAnimation = keyframes({
   "0%": { opacity: 1 },
@@ -141,16 +141,16 @@ export const rustleAnimation = keyframes({
     transform: "rotate(0deg) translateX(0)",
   },
   "20%": {
-    transform: "rotate(10deg) translateX(2px)",
-  },
-  "40%": {
-    transform: "rotate(-10deg) translateX(-2px)",
-  },
-  "60%": {
     transform: "rotate(5deg) translateX(1px)",
   },
-  "80%": {
+  "40%": {
     transform: "rotate(-5deg) translateX(-1px)",
+  },
+  "60%": {
+    transform: "rotate(2deg) translateX(0.5px)",
+  },
+  "80%": {
+    transform: "rotate(-2deg) translateX(-0.5px)",
   },
   "100%": {
     transform: "rotate(0deg) translateX(0)",
@@ -171,6 +171,5 @@ export const glow = style({
 
 export const rustle = style({
   display: "inline-block",
-  color: themeContract.player,
   animation: `${rustleAnimation} 2s infinite`,
 });
