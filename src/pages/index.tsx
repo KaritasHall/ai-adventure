@@ -197,6 +197,8 @@ export default function Game() {
         <title>AI Adventure</title>
         <meta name="description" content="AI text adventure game" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="hotpink" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -242,6 +244,7 @@ export default function Game() {
                 <p className={typePrompt}>&gt;</p>
                 <input
                   type="text"
+                  aria-label="player input"
                   value={userInput}
                   onChange={handleUserInput}
                   className={playerInput}

@@ -62,6 +62,11 @@ export const fadeIn = keyframes({
   to: { opacity: 1 },
 });
 
+export const fadeOut = keyframes({
+  from: { opacity: 1 },
+  to: { opacity: 0 },
+});
+
 export const assistant = style({
   color: themeContract.storyteller,
   paddingBlock: 10,
@@ -99,7 +104,7 @@ export const playerInput = style({
   color: themeContract.player,
   fontFamily: "monospace",
   fontSize: 18,
-  width: 300,
+  width: 500,
 });
 
 export const loadingMessage = style({
@@ -107,12 +112,25 @@ export const loadingMessage = style({
   paddingTop: 15,
   overflow: "hidden",
   whiteSpace: "nowrap",
-  animation: `${typing} 3.5s steps(40, end)`,
+  animation: `${typing} 5s steps(40, end)`,
 });
 export const errorMessage = style({
   color: "red",
   overflow: "hidden",
   whiteSpace: "nowrap",
+});
+
+export const loadingImage = style({
+  // opacity: 1,
+});
+
+export const loadingImageFadeout = style({
+  animation: `${fadeOut} 2s`,
+  animationFillMode: "forwards",
+});
+
+export const generatedImage = style({
+  animation: `${fadeIn} 5s `,
 });
 
 // Word filter animations
