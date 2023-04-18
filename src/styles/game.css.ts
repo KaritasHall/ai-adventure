@@ -126,13 +126,32 @@ export const playerInput = style({
   width: 500,
 });
 
+export const loadingMessageContainer = style({
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+});
+
 export const loadingMessage = style({
   color: "#F5F5F5",
   paddingTop: 15,
   overflow: "hidden",
-  whiteSpace: "nowrap",
-  animation: `${typing} 5s steps(40, end)`,
+  whiteSpace: "normal",
+  animation: `${fadeIn} 5s steps(40, end) forwards`,
+  textAlign: "center",
+  fontSize: 14,
+  "@media": {
+    "screen and (min-width: 420px)": {
+      fontSize: 16,
+      whiteSpace: "nowrap",
+      animation: `${typing} 5s steps(40, end) forwards`,
+    },
+    "screen and (min-width: 768px)": {
+      fontSize: 18,
+    },
+  },
 });
+
 export const errorMessage = style({
   color: "red",
   overflow: "hidden",
@@ -140,7 +159,17 @@ export const errorMessage = style({
 });
 
 export const loadingImage = style({
-  // outline: "solid 2px hotpink",
+  margin: "none",
+  padding: "none",
+  width: 100,
+  "@media": {
+    "screen and (min-width: 420px)": {
+      width: 200,
+    },
+    "screen and (min-width: 768px)": {
+      width: 256,
+    },
+  },
 });
 
 export const loadingImageFadeout = style({
@@ -150,6 +179,16 @@ export const loadingImageFadeout = style({
 
 export const generatedImage = style({
   animation: `${fadeIn} 5s `,
+  width: 100,
+  marginBottom: 20,
+  "@media": {
+    "screen and (min-width: 420px)": {
+      width: 200,
+    },
+    "screen and (min-width: 768px)": {
+      width: 256,
+    },
+  },
 });
 
 // Word filter animations
@@ -209,4 +248,9 @@ export const glow = style({
 export const rustle = style({
   display: "inline-block",
   animation: `${rustleAnimation} 2s infinite`,
+  transition: "200ms",
+  ":hover": {
+    color: themeContract.player,
+    animation: `${rustleAnimation} 4s infinite`,
+  },
 });

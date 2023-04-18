@@ -31,6 +31,7 @@ import {
   playerInputContainer,
   header,
   latestAssistantMessage,
+  loadingMessageContainer,
 } from "@/styles/game.css";
 
 import DalleImg from "@/components/dalleImg";
@@ -238,7 +239,11 @@ export default function Game() {
                   {latestStoryTellerDialogue.content}
                 </WordFilter>
               )}
-              {isLoading && <p className={loadingMessage}>{randomLoading}</p>}
+              {isLoading && (
+                <div className={loadingMessageContainer}>
+                  <p className={loadingMessage}>{randomLoading}</p>
+                </div>
+              )}
               {error && <p className={errorMessage}>{errorMessage}</p>}
             </>
             {latestStoryTellerDialogue && (

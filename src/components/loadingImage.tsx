@@ -12,8 +12,8 @@ export const LoadingImage = ({ fadeout }: LoadingImageProps) => {
       <Image
         src="/crystal-ball.png"
         alt="crystal ball"
-        width={200}
-        height={200}
+        width={256}
+        height={256}
         priority={true}
       />
     </div>

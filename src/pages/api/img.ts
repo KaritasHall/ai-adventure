@@ -18,7 +18,7 @@ export default async function handler(
       req.body.prompt +
       " style should be 8 bit video game graphic in pastel colors",
     n: 1,
-    size: "512x512",
+    size: "256x256",
   });
 
   res.status(200).json(response.data);

@@ -51,8 +51,8 @@ export default function DalleImg({ imagePrompt }: { imagePrompt?: string }) {
           src={data.data[0]?.url}
           className={generatedImage}
           alt="AI generated image of scene"
-          width={200}
-          height={200}
+          width={256}
+          height={256}
           priority={true}
           onLoad={() => {
             console.log("Image loaded"), setFadeOut(true);
