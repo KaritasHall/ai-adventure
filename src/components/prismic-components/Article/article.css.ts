@@ -13,7 +13,7 @@ export const overview = style({
   display: "flex",
   flexDirection: "column",
   alignContent: "center",
-  gap: 18,
+  gap: 8,
 });
 
 export const dateText = style({

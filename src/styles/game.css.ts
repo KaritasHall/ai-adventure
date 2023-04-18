@@ -34,12 +34,12 @@ export const mainSection = style({
 });
 
 export const gameContent = style({
-  marginInline: 180,
-  padding: 28,
-  marginTop: 30,
-  fontSize: 18,
+  padding: 10,
+  marginTop: 5,
+  fontSize: 16,
   lineHeight: 1.5,
-  height: "50vh",
+  height: "30vh",
+  width: "80%",
   overflow: "auto",
   "::-webkit-scrollbar": {
     width: "8px",
@@ -49,6 +49,24 @@ export const gameContent = style({
   "::-webkit-scrollbar-thumb": {
     backgroundColor: themeContract.storyteller,
     borderRadius: "2px",
+  },
+
+  "@media": {
+    "screen and (min-width: 1024px)": {
+      padding: 16,
+      marginTop: 8,
+      fontSize: 18,
+      lineHeight: 1.5,
+      height: "40vh",
+      width: "70%",
+    },
+
+    "screen and (min-width: 1660px)": {
+      fontSize: 18,
+      lineHeight: 1.5,
+      height: "50vh",
+      width: "75%",
+    },
   },
 });
 
@@ -121,7 +139,7 @@ export const errorMessage = style({
 });
 
 export const loadingImage = style({
-  // opacity: 1,
+  // outline: "solid 2px hotpink",
 });
 
 export const loadingImageFadeout = style({

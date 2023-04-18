@@ -37,11 +37,8 @@ export default function DalleImg({ imagePrompt }: { imagePrompt?: string }) {
   console.log("Fading out:", fadeOut);
 
   if (isError) {
-    return (
-      <p className={errorMessage}>
-        {randomError[Math.floor(Math.random() * randomError.length)]}
-      </p>
-    );
+    console.log(randomError[Math.floor(Math.random() * randomError.length)]);
+    return <LoadingImage fadeout={fadeOut} />;
   }
 
   console.log("this is:", data);

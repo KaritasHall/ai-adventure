@@ -31,6 +31,7 @@ import {
   playerInputContainer,
   header,
   latestAssistantMessage,
+  imageContainer,
 } from "@/styles/game.css";
 
 import DalleImg from "@/components/dalleImg";
@@ -136,7 +137,7 @@ export default function Game() {
     setUserInput(e.target.value);
   };
 
-  // The handleSubmit function is called when the user clicks the submit button
+  // The handleSubmit function is called when the user submits their input (by pressing enter)
   // It adds the user's input and the latest story teller dialogue to the dialogue history
   // It then resets the user input and the latest story teller dialogue
   const handleSubmit = async () => {
@@ -169,21 +170,23 @@ export default function Game() {
   }, [latestStoryTellerDialogue]);
 
   // Themes for the game - we switch between themes based on the latest story teller dialogue
+  // Using .find to find the first keyword in the dialogue. That way the first keyword will be the one that is used to switch themes.
   useEffect(() => {
     let dialogue = latestStoryTellerDialogue?.content;
     if (dialogue === undefined) {
       dialogue = dialogueHistory[dialogueHistory.length - 2]?.content;
     }
-    if (dialogue?.includes("forest")) {
+    const keywords = ["forest", "mansion", "abandoned castle", "cave"];
+    const firstKeyword = keywords.find((keyword) =>
+      dialogue?.includes(keyword)
+    );
+    if (firstKeyword === "forest") {
       setCurrentTheme(forestTheme);
-    }
-    if (dialogue?.includes("mansion")) {
+    } else if (firstKeyword === "mansion") {
       setCurrentTheme(mansionTheme);
-    }
-    if (dialogue?.includes("abandoned castle")) {
+    } else if (firstKeyword === "abandoned castle") {
       setCurrentTheme(abandonedTheme);
-    }
-    if (dialogue?.includes("cave")) {
+    } else if (firstKeyword === "cave") {
       setCurrentTheme(caveTheme);
     }
   }, [latestStoryTellerDialogue, dialogueHistory]);
