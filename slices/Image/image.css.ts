@@ -6,7 +6,6 @@ export const imgContainer = style({
   display: "flex",
   flexDirection: "column",
   gap: 14,
-
   justifyContent: "center",
   alignItems: "center",
 });

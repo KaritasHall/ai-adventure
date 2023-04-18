@@ -36,6 +36,7 @@ export const mainSection = style({
 export const gameContent = style({
   padding: 10,
   marginTop: 5,
+  marginInline: 180,
   fontSize: 16,
   lineHeight: 1.5,
   height: "30vh",
