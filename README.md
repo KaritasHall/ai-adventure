@@ -19,4 +19,4 @@ To get the image from Dall-E I take the first two sentences from the opening sce
 
 Even though I didn't focus on design in this project I still wanted my game to have a certain look and feel. I was inspired by the mood and color palettes of classic text adventure games such as Zork and my favorite Sierra game Colonel's Bequest. I wanted high contrast and vibrant, slightly retro feel. I eventually settled on a pastel cyberpunk color vibe, opting for a slightly softer look that is easier on the eyes. You can checkout my [Figma](https://www.figma.com/file/WHyjthIMPEUTfBrgw4OiWn/Module-7?t=xPUJYU57TEPvrRRc-0) if you want to take a look at my moodboards, mvp and brainstorming ideas.
 
-All images, error messages and loading messages are made using ChatGPT :tulip:	
+All images, error messages and loading messages are made using Dall-E/ChatGPT :tulip:	
