@@ -1,15 +1,17 @@
 import { style } from "@vanilla-extract/css";
 
 export const imgContainer = style({
-  display: "grid",
-  gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+  // display: "grid",
+  // gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+  display: "flex",
+  flexDirection: "column",
   gap: 14,
+
+  justifyContent: "center",
+  alignItems: "center",
 });
 
-export const imgBackground = style({
-  backgroundColor: "#F3F4F6",
-  boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
-});
+export const imgBackground = style({});
 
 export const imgCaption = style({
   fontStyle: "italic",

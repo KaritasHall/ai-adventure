@@ -3,7 +3,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 
 import { Bounded } from "@/components/prismic-components/Bounded/Bounded";
-import { imgBackground, imgCaption, imgContainer } from "./image.css";
+import { imgCaption, imgContainer } from "./image.css";
 
 // todo: define slice type
 const Image = ({ slice }: { slice: any }) => {
@@ -13,7 +13,7 @@ const Image = ({ slice }: { slice: any }) => {
     <Bounded as="section" size={slice.variation === "wide" ? "widest" : "base"}>
       <figure className={imgContainer}>
         {prismicH.isFilled.image(image) && (
-          <div className={imgBackground}>
+          <div>
             <PrismicNextImage field={image} sizes="100vw" className="w-full" />
           </div>
         )}

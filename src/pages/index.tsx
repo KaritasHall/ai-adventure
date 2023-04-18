@@ -31,7 +31,6 @@ import {
   playerInputContainer,
   header,
   latestAssistantMessage,
-  imageContainer,
 } from "@/styles/game.css";
 
 import DalleImg from "@/components/dalleImg";
