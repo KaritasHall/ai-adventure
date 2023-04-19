@@ -7,7 +7,7 @@ import { quote } from "./quote.css";
 // todo: define slice type
 const Quote = ({ slice }: { slice: any }) => {
   return (
-    <Bounded as="section" size="wide">
+    <Bounded as="section" size="base">
       {prismicH.isFilled.richText(slice.primary.quote) && (
         <div className={quote}>
           &ldquo;

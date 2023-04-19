@@ -66,7 +66,7 @@ export const gameContent = style({
       fontSize: 18,
       lineHeight: 1.5,
       height: "50vh",
-      width: "75%",
+      width: "60%",
     },
   },
 });
