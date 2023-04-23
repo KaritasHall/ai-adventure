@@ -1,8 +1,5 @@
 import { blogThemeContract } from "@/styles/themes.css";
 import { style } from "@vanilla-extract/css";
-export const imgContainer = style({
-  position: "relative",
-});
 
 export const listItem = style({
   width: "60%",

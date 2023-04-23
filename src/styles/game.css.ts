@@ -18,6 +18,7 @@ export const gameTitle = style({
 export const blogLink = style({
   color: "white",
   fontSize: 18,
+  transform: "translate3d(-12px, 4px, 0)",
   fontFamily: "Lato, sans-serif",
   ":hover": {
     color: themeContract.player,
@@ -65,7 +66,7 @@ export const gameContent = style({
     "screen and (min-width: 1660px)": {
       fontSize: 18,
       lineHeight: 1.5,
-      height: "50vh",
+      height: "45vh",
       width: "60%",
     },
   },
@@ -123,7 +124,7 @@ export const playerInput = style({
   color: themeContract.player,
   fontFamily: "monospace",
   fontSize: 18,
-  width: 500,
+  width: "100%",
 });
 
 export const loadingMessageContainer = style({
@@ -144,7 +145,7 @@ export const loadingMessage = style({
     "screen and (min-width: 420px)": {
       fontSize: 16,
       whiteSpace: "nowrap",
-      animation: `${typing} 5s steps(40, end) forwards`,
+      animation: `${typing} 10s steps(80, end) forwards`,
     },
     "screen and (min-width: 768px)": {
       fontSize: 18,

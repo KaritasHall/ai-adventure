@@ -22,7 +22,7 @@ export const navContainer = style({
   justifyContent: "flex-end",
   textTransform: "capitalize",
   gap: 36,
-  paddingBottom: 36,
+  paddingBlock: 40,
 });
 
 export const navItem = style({

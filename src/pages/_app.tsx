@@ -8,6 +8,7 @@ import {
   blogThemeWarm,
 } from "@/styles/themes.css";
 import { useState, useEffect, useMemo } from "react";
+import Head from "next/head";
 
 const queryClient = new QueryClient();
 
@@ -54,10 +55,20 @@ export default function App({ Component, pageProps }: AppProps) {
   console.log({ theme, activeTheme });
 
   return (
-    <div className={activeTheme}>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </div>
+    <>
+      <Head>
+        <title>AI Adventure</title>
+        <meta name="description" content="AI text adventure game" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#FF69B4" />
+
+        <link rel="icon" href="/crystal-ball.png" />
+      </Head>
+      <div className={activeTheme}>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </div>
+    </>
   );
 }

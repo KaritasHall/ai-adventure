@@ -32,8 +32,8 @@ const Profile = ({
             {prismicH.isFilled.image(profilePicture) && (
               <PrismicNextImage
                 field={profilePicture}
-                fill={true}
                 className="object-cover"
+                alt=""
               />
             )}
           </div>

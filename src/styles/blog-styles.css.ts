@@ -85,4 +85,18 @@ export const indexArticleList = style({
   alignContent: "center",
   alignItems: "center",
   gap: 60,
+  paddingTop: 60,
+  paddingBottom: 60,
+  marginBottom: 120,
+  position: "relative",
+  ":after": {
+    content: "''",
+    position: "absolute",
+    bottom: 0,
+    left: "20%",
+    right: "20%",
+    height: 1,
+    backgroundColor: blogThemeContract.accent,
+  },
+  // borderBottom: `1px solid ${blogThemeContract.accent}`,
 });

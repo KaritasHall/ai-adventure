@@ -36,6 +36,28 @@ import {
 
 import DalleImg from "@/components/dalleImg";
 
+// Putting Inventory in it's own sentence
+function newLine(text: string) {
+  // Split the string into two parts using the regular expression /(Inventory: )/
+  const inventoryRegex = /Inventory: (.+)/;
+  const inventoryMatch = text.match(inventoryRegex);
+
+  if (!inventoryMatch) {
+    return {
+      textWithoutInventory: text.trim(),
+      inventory: "",
+    };
+  }
+
+  const inventoryList = inventoryMatch[1];
+  const inventoryItems = inventoryList.split(", ");
+
+  return {
+    textWithoutInventory: text.replace(inventoryRegex, "").trim(),
+    inventory: `Inventory: ${inventoryItems.join(", ")}`,
+  };
+}
+
 // This is the game loop
 // We first send the inital prompt to the API and render the opening scenario
 // Then we wait for the user to input a response
@@ -191,20 +213,10 @@ export default function Game() {
     }
   }, [latestStoryTellerDialogue, dialogueHistory]);
 
-  console.log(currentTheme);
-  console.log(latestStoryTellerDialogue);
+  console.log("Dialogue:", dialogueHistory);
 
   return (
     <>
-      <Head>
-        <title>AI Adventure</title>
-        <meta name="description" content="AI text adventure game" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#FF69B4" />
-
-        <link rel="icon" href="/crystal-ball.png" />
-      </Head>
-
       <main className={`${mainSection} ${currentTheme}`}>
         <>
           <nav className={header}>
@@ -224,20 +236,26 @@ export default function Game() {
                   key={index}
                   className={role === "user" ? user : assistant}
                 >
-                  {content}
+                  {newLine(content).textWithoutInventory}
                 </WordFilter>
               ))}
               {latestStoryTellerDialogue && (
-                <WordFilter
-                  key={latestStoryTellerDialogue.content}
-                  className={
-                    latestStoryTellerDialogue.role === "user"
-                      ? user
-                      : latestAssistantMessage
-                  }
-                >
-                  {latestStoryTellerDialogue.content}
-                </WordFilter>
+                <>
+                  <WordFilter
+                    key={latestStoryTellerDialogue.content}
+                    className={
+                      latestStoryTellerDialogue.role === "user"
+                        ? user
+                        : latestAssistantMessage
+                    }
+                  >
+                    {
+                      newLine(latestStoryTellerDialogue.content)
+                        .textWithoutInventory
+                    }
+                  </WordFilter>
+                  <p>{newLine(latestStoryTellerDialogue.content).inventory}</p>
+                </>
               )}
               {isLoading && (
                 <div className={loadingMessageContainer}>

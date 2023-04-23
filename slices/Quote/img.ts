@@ -14,7 +14,9 @@ export default async function handler(
   res: NextApiResponse<ImagesResponse>
 ) {
   const response = await openai.createImage({
-    prompt: req.body.prompt + " style should be pixel art in pastel colors",
+    prompt:
+      req.body.prompt +
+      " style should be 8 bit video game graphic in pastel colors",
     n: 1,
     size: "256x256",
   });
